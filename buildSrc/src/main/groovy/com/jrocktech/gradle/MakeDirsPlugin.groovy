@@ -18,7 +18,7 @@ class MakeDirsPlugin implements Plugin<Project> {
             newDir.mkdirs()
         }
 
-        project.task("mkdirs") << {
+        project.task("init") << {
             if(project.plugins.hasPlugin('java')){
                 project.sourceSets.all.java.srcDirs*.each createDirs
                 project.sourceSets.all.resources.srcDirs*.each createDirs
@@ -35,6 +35,6 @@ class MakeDirsPlugin implements Plugin<Project> {
         }
 
         // Assign a description to the task.
-        project.tasks.mkdirs.description = "Create source directories."
+        project.tasks.init.description = "Create source directories."
     }
 }

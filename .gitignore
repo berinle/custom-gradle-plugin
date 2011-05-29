@@ -4,3 +4,4 @@
 *.iws
 **/*.class
 buildSrc/build/
+build/

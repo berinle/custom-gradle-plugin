@@ -1,15 +1,23 @@
-import com.jrocktech.gradle.MakeDirsPlugin
-
-apply plugin: MakeDirsPlugin
-apply plugin: 'idea'
 apply plugin: 'groovy'
+apply plugin: 'maven'
+apply plugin: 'idea'
 
-basePackageDir = 'com.jrocktech'
+version = '1.0'
+group = 'com.jrocktech.gradle.plugins'
 
 dependencies {
 	// Add all JAR files in the lib directory of theGradle installation directory
 	// to the groovy configuration (is also used by compile configuration)
-//	groovy fileTree(dir: new File(gradle.gradleHomeDir, 'lib'), includes: ['*.jar'])
+	groovy fileTree(dir: new File(gradle.gradleHomeDir, 'lib'), includes: ['*.jar'])
 
-    compile gradleApi()
+//    compile gradleApi()
+//    runtime localGroovy()
 }
+
+uploadArchives {
+    repositories.mavenDeployer {
+        repository url: 'file:///shared/repos/m2/repository'
+    }
+}
+
+uploadArchives.dependsOn ':build'
